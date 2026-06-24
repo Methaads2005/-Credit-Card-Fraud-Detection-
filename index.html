@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Fraud Detection Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-secondary: #10b981;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem;
+            background-image: radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #34d399, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem 1.25rem;
+        }
+
+        th {
+            background-color: rgba(15, 23, 42, 0.6);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .highlight-row {
+            background-color: rgba(16, 185, 129, 0.08) !important;
+            font-weight: 600;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .gallery-item {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💳 Credit Card Fraud Detection Dashboard</h1>
+            <p>Dealing with imbalanced datasets and unsupervised anomaly detection models</p>
+        </header>
+
+        <div class="card">
+            <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">📊 Model Evaluation Summary</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>F1-Score</th>
+                            <th>ROC-AUC</th>
+                            <th>PR-AUC (AP)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight-row">
+                            <td>Random Forest (Class Weighted)</td>
+                            <td>0.9186</td>
+                            <td>0.8061</td>
+                            <td>0.8587</td>
+                            <td>0.9749</td>
+                            <td>0.8649</td>
+                        </tr>
+                        <tr>
+                            <td>LR (Baseline)</td>
+                            <td>0.8289</td>
+                            <td>0.6429</td>
+                            <td>0.7241</td>
+                            <td>0.9427</td>
+                            <td>0.7388</td>
+                        </tr>
+                        <tr>
+                            <td>Gradient Boosting (Class Weighted)</td>
+                            <td>0.3398</td>
+                            <td>0.8980</td>
+                            <td>0.4930</td>
+                            <td>0.9734</td>
+                            <td>0.7449</td>
+                        </tr>
+                        <tr>
+                            <td>Isolation Forest (Anomaly Detection)</td>
+                            <td>0.2313</td>
+                            <td>0.3163</td>
+                            <td>0.2672</td>
+                            <td>0.6575</td>
+                            <td>0.1611</td>
+                        </tr>
+                        <tr>
+                            <td>LR (Class Weighted)</td>
+                            <td>0.0609</td>
+                            <td>0.9184</td>
+                            <td>0.1142</td>
+                            <td>0.9634</td>
+                            <td>0.7175</td>
+                        </tr>
+                        <tr>
+                            <td>LR (SMOTE)</td>
+                            <td>0.0589</td>
+                            <td>0.9184</td>
+                            <td>0.1106</td>
+                            <td>0.9629</td>
+                            <td>0.7251</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">📈 Performance Plots</h3>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="plots/precision_recall_curves.png" alt="Precision Recall Curves">
+                    <p>Precision-Recall Curves (AP)</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="plots/confusion_matrices.png" alt="Confusion Matrices">
+                    <p>Confusion Matrices Comparison</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="plots/metrics_comparison.png" alt="Metrics Comparison">
+                    <p>F1 / Precision / Recall</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a href="http://localhost:8000" class="btn btn-secondary">← Back to Main Dashboard</a>
+                <a href="README.md" class="btn btn-primary" target="_blank">View README</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
